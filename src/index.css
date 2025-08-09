@@ -1,0 +1,114 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+/* Subtle reorder animation for form builder field cards */
+.fb-field-card {
+  /* Enable transform animations when list order changes */
+  will-change: transform;
+}
+
+/* Animate layout shifts (works with MUI spacing / drag events) */
+.fb-field-card {
+  transition: transform .25s ease, box-shadow .25s ease, background-color .3s;
+}
+
+/* Optional keyframe for a gentle pop when item is dropped */
+@keyframes fb-pop-in {
+  0% { transform: scale(.97); }
+  60% { transform: scale(1.005); }
+  100% { transform: scale(1); }
+}
+
+.fb-field-card.fb-drop-animate {
+  animation: fb-pop-in .35s ease;
+}
+
+/* Ghost placeholder retains layout space while actual dragged card is lifted */
+.fb-field-placeholder {
+  border: 2px dashed rgba(128,128,128,0.35);
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.08));
+  animation: fb-placeholder-pulse 1s ease-in-out infinite;
+}
+
+@keyframes fb-placeholder-pulse {
+  0%,100% { opacity: .35; }
+  50% { opacity: .65; }
+}
+
+/* Drop pulse */
+@keyframes fb-shadow-pulse {
+  0% { box-shadow: 0 0 0 rgba(99,102,241,0.0); }
+  40% { box-shadow: 0 4px 24px rgba(99,102,241,0.35); }
+  100% { box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+}
+
+.fb-pulse {
+  animation: fb-shadow-pulse .7s ease;
+}
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

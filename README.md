@@ -610,4 +610,8 @@ src/
 - **Code Splitting**: Separate chunks for UI libraries, state management, and utilities
 - **Async Loading**: Pages load on-demand with fallback indicators
 
+# Output Screen Shot 
+![Alt text](./Image%20output/console%20ss-2.PNG)
+
+![Alt text](./Image%20output/console%20ss.PNG)
 

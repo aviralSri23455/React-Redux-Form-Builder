@@ -325,26 +325,24 @@ This splits the large bundle into smaller, cacheable chunks that load faster.
 
 3. **Test Custom Formula**
    - Add derived field: "Custom Calculation"
-   - Formula type: "Custom Formula"
-   - Enter formula using actual field IDs (see example below)
+   - Formula type: "Custom Formula" 
+   - Enter formula  
+    - **sum(field1, field2) * 0.8**
+
    - Select parent fields (must be numeric fields)
    - Save field
    - Go to preview and test with sample values
 
 4. **Test Advanced Custom Formulas**
-   - **Finding Field IDs**: Submit your form and check browser console for field IDs
-     - Example output: `{field_1754754848309_69gvvu8dg: '20', field_1754754876397_lmgaghjet: '30'}`
-   - Formula examples using real field IDs:
-     - `field_1754754848309_69gvvu8dg + field_1754754876397_lmgaghjet` (simple addition)
-     - `sum(field_1754754848309_69gvvu8dg, field_1754754876397_lmgaghjet)` (using built-in function)
-     - `multiply(field_1754754848309_69gvvu8dg, 2)` (multiplication with constant)
-     - `sum(field_1754754848309_69gvvu8dg, field_1754754876397_lmgaghjet) / 2` (average)
+   
+   **Available Functions:**
+   • `sum(field1, field2, ...)` - Adds numeric values
+   • `multiply(field1, field2, ...)` - Multiplies numeric values  
+   • `concat(field1, field2, ...)` - Combines text values
+   • Use field references directly: `field1 + field2 * 2`
 
-   **How to get Field IDs:**
-   1. Create your regular fields first
-   2. Go to preview, fill out the form, and submit
-   3. Check browser console for the submitted values object
-   4. Copy the exact field IDs (like `field_1754754848309_69gvvu8dg`) into your custom formulas
+  
+
 
 ### ✅ Testing Validation Rules
 1. **Required Field Validation**
@@ -486,48 +484,7 @@ This splits the large bundle into smaller, cacheable chunks that load faster.
    - Verify proper ARIA labels
    - Check color contrast ratios
 
-## 🔧 Troubleshooting
 
-### Common Issues & Solutions
-
-#### Forms Not Saving to Dashboard
-```javascript
-// Check localStorage in browser console
-console.log('Saved forms:', JSON.parse(localStorage.getItem('formBuilder_savedForms') || '[]'));
-
-// Clear localStorage if corrupted
-localStorage.removeItem('formBuilder_savedForms');
-```
-
-#### Derived Fields Not Calculating
-- Ensure parent fields have valid values
-- Check formula syntax for custom formulas
-- Verify parent field selection is correct
-- Check browser console for JavaScript errors
-- **For Custom Formulas**: Use actual field IDs, not generic names like `field1`
-  - Wrong: `sum(field1, field2)`
-  - Right: `sum(score1, score2)` (using actual field IDs from your form)
-
-#### Custom Formula Errors
-If you see "field1 is not defined" errors:
-```javascript
-// Check your field IDs in browser console after form submission
-// Example output: {field_1754754848309_69gvvu8dg: '20', field_1754754876397_lmgaghjet: '30'}
-
-// Use these exact IDs in your formulas:
-// Right: sum(field_1754754848309_69gvvu8dg, field_1754754876397_lmgaghjet)
-// Wrong: sum(field1, field2)
-```
-- Custom formulas must reference the exact auto-generated field IDs
-- Field IDs follow pattern: `field_[timestamp]_[random]` (e.g., `field_1754754848309_69gvvu8dg`)
-- **Easy way to find IDs**: Submit your form and check console output
-- Use the parent field selector dropdown to see available field names
-
-#### Validation Not Working
-- Ensure field types match validation rules
-- Check required field settings
-- Verify email format is correct
-- Test with different input values
 
 #### Build/Development Issues
 ```bash
@@ -544,12 +501,6 @@ npm run build
 # Look for chunk breakdown in terminal output
 ```
 
-#### Large Bundle Warning
-If you see "chunks are larger than 500 kB" warning:
-- This is normal for development - the app uses code splitting
-- Production builds are automatically optimized with separate chunks
-- Vercel serves with gzip compression (reduces ~895KB to ~277KB)
-- First load downloads main chunk, subsequent pages load smaller chunks
 
 ### Browser Compatibility
 - **Supported**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
@@ -615,3 +566,4 @@ src/
 
 ![Alt text](./Image%20output/console%20ss.PNG)
 
+![Alt text](./Image%20output/console%20ss-3.PNG)

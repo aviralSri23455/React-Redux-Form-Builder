@@ -45,7 +45,83 @@ const FormRenderer: React.FC = () => {
       .filter((field) => field.isDerived && field.derivedConfig)
       .forEach((derivedField) => {
         try {
-          const newValue = calculateDerivedValue(derivedField, formValues);
+          let newValue = calculateDerivedValue(derivedField, formValues);
+          
+          // Enhanced age calculation with field label detection
+          const parentFields = derivedField.derivedConfig?.parentFields || [];
+          const fieldLabel = (derivedField.label || '').toLowerCase();
+          const fieldId = (derivedField.id || '').toLowerCase();
+          
+          // More robust age calculation detection
+          const isAgeCalculation = 
+            derivedField.derivedConfig?.formulaType === 'age_from_birthdate' ||
+            (derivedField.derivedConfig?.formulaType === 'custom' && 
+               parentFields.length === 1 && 
+               (currentForm.fields.find(f => f.id === parentFields[0])?.type === 'date' ||
+                fieldLabel.includes('age') || 
+                fieldLabel.includes('calculated age') ||
+                fieldId.includes('age')));
+          
+          if (isAgeCalculation && parentFields.length === 1) {
+            const parentFieldId = parentFields[0];
+            const dateValue = formValues[parentFieldId];
+            
+            console.log('=== AGE CALCULATION DEBUG ===');
+            console.log('Field:', derivedField.label || derivedField.id);
+            console.log('Parent field ID:', parentFieldId);
+            console.log('Date value from form:', dateValue);
+            console.log('Date value type:', typeof dateValue);
+            
+            if (dateValue) {
+              try {
+                let parsedDate: Date | null = null;
+                
+                // Handle DD/MM/YYYY format (e.g., "10/08/1990")
+                if (typeof dateValue === 'string' && dateValue.includes('/')) {
+                  const parts = dateValue.split('/');
+                  if (parts.length === 3) {
+                    const day = parseInt(parts[0], 10);
+                    const month = parseInt(parts[1], 10) - 1; // JS months are 0-based
+                    const year = parseInt(parts[2], 10);
+                    parsedDate = new Date(year, month, day);
+                  }
+                }
+                // Handle YYYY-MM-DD format
+                else if (typeof dateValue === 'string' && dateValue.includes('-')) {
+                  parsedDate = new Date(dateValue);
+                }
+                // Handle existing Date objects
+                else {
+                  parsedDate = new Date(dateValue);
+                }
+                
+                if (parsedDate && !isNaN(parsedDate.getTime())) {
+                  const today = new Date();
+                  let age = today.getFullYear() - parsedDate.getFullYear();
+                  
+                  // Adjust age based on month and day
+                  const birthMonth = parsedDate.getMonth();
+                  const birthDay = parsedDate.getDate();
+                  const currentMonth = today.getMonth();
+                  const currentDay = today.getDate();
+                  
+                  if (currentMonth < birthMonth || 
+                      (currentMonth === birthMonth && currentDay < birthDay)) {
+                    age--;
+                  }
+                  
+                  // Return the actual age, not a converted score
+                  newValue = Math.max(0, age);
+                }
+              } catch (dateError) {
+                console.error('Age calculation error:', dateError);
+              }
+            }
+          } else {
+            // Use standard calculation for non-age fields
+            newValue = calculateDerivedValue(derivedField, formValues);
+          }
+          
           if (updatedValues[derivedField.id] !== newValue) {
             updatedValues[derivedField.id] = newValue;
             hasChanges = true;

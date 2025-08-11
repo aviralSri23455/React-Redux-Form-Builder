@@ -1,6 +1,25 @@
 # React + Redux Form Builder
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_App-blue?style=for-the-badge)](https://react-redux-form-builder.vercel.app/)
+[![GitHub Stars](https://img.shields.io/github/stars/aviralSri23455/React-Redux-Form-Builder?style=for-the-badge&logo=github)](https://github.com/aviralSri23455/React-Redux-Form-Builder)
+[![License](https://img.shields.io/github/license/aviralSri23455/React-Redux-Form-Builder?style=for-the-badge)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+
+> 🎯 **[Try the Live Demo](https://react-redux-form-builder.vercel.app/)** - Build forms instantly with drag-and-drop!
+
 A dynamic form builder application built with React, TypeScript, Redux Toolkit, Material-UI, and localStorage. This application allows users to create custom forms with advanced features like derived fields, validation rules, and real-time preview.
+
+## ✨ Quick Start
+
+```bash
+# Clone and run locally
+git clone https://github.com/aviralSri23455/React-Redux-Form-Builder.git
+cd React-Redux-Form-Builder
+npm install
+npm run dev
+```
+
+**🌐 Or try it now:** [https://react-redux-form-builder.vercel.app/](https://react-redux-form-builder.vercel.app/)
 
 ## 🚀 Features
 
@@ -548,6 +567,38 @@ src/
 - Dark / Light adaptive palette
 - Compact density mode for data-heavy workflows
 - Responsive design for all devices
+
+## 🏆 Why Choose This Form Builder?
+
+| Feature | This Project | Others |
+|---------|--------------|--------|
+| 🎯 **Zero Backend** | ✅ Pure client-side | ❌ Requires server |
+| 🧮 **Smart Calculations** | ✅ Age, formulas, auto-sum | ❌ Basic only |
+| 🎨 **Dark Mode** | ✅ Instant toggle | ❌ Limited support |
+| 📱 **Mobile Ready** | ✅ Fully responsive | ❌ Desktop-focused |
+| 🔄 **Auto-Save** | ✅ Draft recovery | ❌ Manual save only |
+| ⚡ **TypeScript** | ✅ 100% type-safe | ❌ JavaScript only |
+
+## 🌟 Community & Support
+
+- 🐛 **Found a bug?** [Open an issue](https://github.com/aviralSri23455/React-Redux-Form-Builder/issues)
+- 💡 **Feature request?** [Start a discussion](https://github.com/aviralSri23455/React-Redux-Form-Builder/discussions)
+- ⭐ **Like this project?** Give it a star!
+- 🤝 **Want to contribute?** PRs are welcome!
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+**🚀 [Try Live Demo](https://react-redux-form-builder.vercel.app/) | ⭐ [Star on GitHub](https://github.com/aviralSri23455/React-Redux-Form-Builder) | 🐛 [Report Issues](https://github.com/aviralSri23455/React-Redux-Form-Builder/issues)**
+
+Made with ❤️ by [aviralSri23455](https://github.com/aviralSri23455)
+
+</div>
 - Accessibility-first approach (reduced motion support)
 
 ## 📈 Performance Features
